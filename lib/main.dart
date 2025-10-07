@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'models/post.dart';
 import 'post_detail_page.dart';
 import 'search.dart';
+import 'profile.dart';
 
 void main() => runApp(const ForumApp());
 
@@ -56,7 +57,7 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     final pages = [
       ForumHome(posts: posts),
-      SearchPage(allPosts: posts), // ✅ sudah kirim list Post ke SearchPage
+      SearchPage(allPosts: posts),
       const ProfilePage(),
     ];
 
@@ -109,8 +110,7 @@ class ForumHome extends StatelessWidget {
         return Card(
           margin: const EdgeInsets.symmetric(vertical: 8),
           elevation: 2,
-          shape:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           child: ListTile(
             title: Text(post.title,
                 style: const TextStyle(fontWeight: FontWeight.bold)),
@@ -130,8 +130,7 @@ class ForumHome extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                    builder: (_) => PostDetailPage(post: post)),
+                MaterialPageRoute(builder: (_) => PostDetailPage(post: post)),
               );
             },
           ),
@@ -156,8 +155,7 @@ class _AddPostFormState extends State<AddPostForm> {
   String? selectedKelas;
   String? selectedMatkul;
 
-  final List<String> kelasList =
-  List.generate(12, (index) => 'Kelas ${index + 1}');
+  final List<String> kelasList = List.generate(12, (index) => 'Kelas ${index + 1}');
   final List<String> matkulList = [
     'Matematika',
     'Fisika',
@@ -200,8 +198,7 @@ class _AddPostFormState extends State<AddPostForm> {
                 labelText: 'Isi Pertanyaan',
                 border: OutlineInputBorder(),
               ),
-              validator: (v) =>
-              v == null || v.isEmpty ? 'Isi pertanyaan' : null,
+              validator: (v) => v == null || v.isEmpty ? 'Isi pertanyaan' : null,
             ),
             const SizedBox(height: 16),
             _buildDropdown(
@@ -251,22 +248,13 @@ class _AddPostFormState extends State<AddPostForm> {
   }) {
     return DropdownButtonFormField<String>(
       isExpanded: true,
-      value: value,
+      initialValue: value,
       decoration: InputDecoration(
         labelText: label,
         border: const OutlineInputBorder(),
       ),
-      items:
-      items.map((e) => DropdownMenuItem(value: e, child: Text(e))).toList(),
+      items: items.map((e) => DropdownMenuItem(value: e, child: Text(e))).toList(),
       onChanged: onChanged,
     );
   }
-}
-
-class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
-
-  @override
-  Widget build(BuildContext context) =>
-      const Center(child: Text('Halaman Profil (belum dibuat)'));
 }
