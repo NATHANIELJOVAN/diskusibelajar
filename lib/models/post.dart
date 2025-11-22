@@ -13,4 +13,3 @@ class Post {
     required this.matkul,
   });
 }
-//s
